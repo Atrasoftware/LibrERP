@@ -290,7 +290,7 @@ class sale_order(orm.Model):
                 'to_invoice': invoice_ratio,
                 'state': 'pending',
                 'warn_manager': True,
-                'user_id': shop.project_manager_id and shop.project_manager_id.id or False,
+                'user_id': shop.project_manager_id and shop.project_manager_id.id or order.user_id and order.user_id.id or False,
             }
 
             if shop.member_ids:
@@ -307,10 +307,10 @@ class sale_order(orm.Model):
                 project_values['tasks'] = task_values
 
             # todo think better with matrix / function project_manager
-            if values.get('section_id', False):
-                sale_team = self.pool['crm.case.section'].browse(cr, uid, values['section_id'], context=context)
-                if sale_team.user_id:
-                    project_values['user_id'] = sale_team.user_id.id
+            # if values.get('section_id', False):
+            #     sale_team = self.pool['crm.case.section'].browse(cr, uid, values['section_id'], context=context)
+            #     if sale_team.user_id:
+            #         project_values['user_id'] = sale_team.user_id.id
 
             # i use this mode because if there are no project_id on shop use default value
             if shop.project_id:

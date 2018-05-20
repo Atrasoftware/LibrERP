@@ -9,7 +9,7 @@ _logger = logging.getLogger(__name__)
 
 class mrp_production(orm.Model):
 
-    _inherit = "mrp.production"
+    _inherit = 'mrp.production'
 
     _columns = {
         'is_from_order_requirement': fields.boolean('is from order requirement'),
